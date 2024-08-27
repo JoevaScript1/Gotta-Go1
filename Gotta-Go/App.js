@@ -7,7 +7,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import { Picker } from '@react-native-picker/picker';
-
+import { fetchRestrooms } from './src/utilities/restrooms';
 import FirstRoute from './src/routes/FirstRoute';
 import SecondRoute from './src/routes/SecondRoute';
 
@@ -24,29 +24,14 @@ export default function App() {
   const [userLocation, setUserLocation] = useState(null);
   const [loading, setLoading] = useState(false);
   
-  const numberOnPage = 50;
-  const page = 1;
 
-  const fetchRestrooms = async (region) => {
-    if (!region) return;
+
+  const initRestrooms = async (region) => { 
     setLoading(true); // Start loading indicator
-    const { latitude, longitude } = region;
+
     try {
-      const response = await fetch(
-        `https://www.refugerestrooms.org/api/v1/restrooms/by_location?lat=${latitude}&lng=${longitude}&per_page=${numberOnPage}&page=${page}`
-      );
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      const contentType = response.headers.get('content-type');
-      if (!contentType || !contentType.includes('application/json')) {
-        throw new Error('Received non-JSON response');
-      }
-
-      const data = await response.json();
-      setRestrooms(data);
+      const restrooms = await fetchRestrooms(region)
+      setRestrooms(restrooms);
     } catch (error) {
       console.error('Error fetching restrooms:', error.message);
     } finally {
@@ -78,7 +63,7 @@ export default function App() {
         });
 
         // Fetch restrooms after getting user location
-        fetchRestrooms({
+        initRestrooms({
           latitude,
           longitude,
           latitudeDelta: 0.0122,
@@ -98,7 +83,7 @@ export default function App() {
         restrooms={restrooms}
         region={region}
         setRegion={setRegion}
-        fetchRestrooms={fetchRestrooms}
+        fetchRestrooms={initRestrooms}
         userLocation={userLocation}
       />
     ),

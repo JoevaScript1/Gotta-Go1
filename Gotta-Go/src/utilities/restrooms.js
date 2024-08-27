@@ -1,9 +1,7 @@
 
-const fetchRestrooms = async (region) => {
+export const fetchRestrooms = async (region, numberOnPage = 50, page = 1) => {
     if (!region) return;
-    // setLoading(true); // Start loading indicator
     const { latitude, longitude } = region;
-
       const response = await fetch(
         `https://www.refugerestrooms.org/api/v1/restrooms/by_location?lat=${latitude}&lng=${longitude}&per_page=${numberOnPage}&page=${page}`
       );
