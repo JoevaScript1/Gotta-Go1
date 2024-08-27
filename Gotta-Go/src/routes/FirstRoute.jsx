@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View,  TouchableOpacity, Modal  } from 'react-native';
-import MapView, { Marker, Callout } from 'react-native-maps';
-import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { Picker } from '@react-native-picker/picker';
+import Map from '../componenets/Map';
 
 const FirstRoute = ({ restrooms, region, setRegion, fetchRestrooms, userLocation }) => {
   const [iconType, setIconType] = useState('default'); // Default to classic pin
@@ -24,54 +23,13 @@ const FirstRoute = ({ restrooms, region, setRegion, fetchRestrooms, userLocation
   ];
   return (
     <View style={styles.container}>
-      <MapView
-        style={styles.map}
-        region={region}
-        onRegionChangeComplete={handleRegionChange}
-        showsUserLocation={true}
-      >
+    <Map region={region}
+    onRegionChangeComplete={handleRegionChange}
+    restrooms={restrooms}
+    iconType={iconType}
+    />
 
-        {/* Restroom Markers */}
-        {restrooms.map((restroom) => (
-          <Marker
-            key={restroom.id}
-            coordinate={{ latitude: restroom.latitude, longitude: restroom.longitude }}
-          >
-            {/* Conditional Rendering Based on Selected Icon Type */}
-            {iconType === 'toilet' ? (
-              <FontAwesome5 name="toilet" size={30} color="blue" />
-            ) : (
-              <FontAwesome5 name="map-pin" size={30} color="red" /> // Default pin icon
-            )}
-
-            <Callout>
-              <View style={styles.calloutContainer}>
-                <Text style={styles.title}>{restroom.name}</Text>
-                <View style={styles.infoContainer}>
-                  <FontAwesome5 name="map-marker-alt" size={16} color="black" />
-                  <Text style={styles.infoText}>{restroom.street}</Text>
-                </View>
-                <View style={styles.infoContainer}>
-                  <FontAwesome5 name="building" size={16} color="black" />
-                  <Text style={styles.infoText}>{restroom.city}, {restroom.state}</Text>
-                </View>
-                <View style={styles.infoContainer}>
-                  <FontAwesome5 name="info-circle" size={16} color="black" />
-                  <Text style={styles.infoText}>{restroom.comment}</Text>
-                </View>
-                <View style={styles.infoContainer}>
-                  <FontAwesome5 name="wheelchair" size={16} color={restroom.accessible ? 'green' : 'red'} />
-                  <Text style={styles.infoText}>{restroom.accessible ? 'Accessible' : 'Not Accessible'}</Text>
-                </View>
-                <View style={styles.infoContainer}>
-                  <FontAwesome5 name="genderless" size={16} color={restroom.unisex ? 'blue' : 'gray'} />
-                  <Text style={styles.infoText}>{restroom.unisex ? 'Unisex' : 'Gender-specific'}</Text>
-                </View>
-              </View>
-            </Callout>
-          </Marker>
-        ))}
-      </MapView>
+      
 
       {/* Refresh Button */}
       <TouchableOpacity
