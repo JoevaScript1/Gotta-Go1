@@ -7,7 +7,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import { Picker } from '@react-native-picker/picker';
-import { fetchRestrooms } from './src/utilities/restrooms';
+import  fetchRestrooms  from './src/utilities/restrooms';
 import FirstRoute from './src/routes/FirstRoute';
 import SecondRoute from './src/routes/SecondRoute';
 

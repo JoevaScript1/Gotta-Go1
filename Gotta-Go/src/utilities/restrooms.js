@@ -1,5 +1,5 @@
 
-export const fetchRestrooms = async (region, numberOnPage = 50, page = 1) => {
+export default async (region, numberOnPage = 50, page = 1) => {
     if (!region) return;
     const { latitude, longitude } = region;
       const response = await fetch(
