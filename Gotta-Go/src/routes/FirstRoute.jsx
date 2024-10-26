@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View,  TouchableOpacity, Modal  } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-import Map from '../componenets/Map';
+import Map from '../components/Map';
 
 const FirstRoute = ({ restrooms, region, setRegion, fetchRestrooms, userLocation }) => {
   const [iconType, setIconType] = useState('default'); // Default to classic pin

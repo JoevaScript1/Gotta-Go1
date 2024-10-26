@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "Gotta-Go",
+    "scheme": "gottago",
     "slug": "Gotta-Go",
     "version": "1.0.0",
     "orientation": "portrait",
