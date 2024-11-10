@@ -1,7 +1,7 @@
 // src/components/Account.js
 import React, { useState } from "react";
 import { View, Text, Button, TextInput, StyleSheet, Alert } from "react-native";
-import { supabase } from "C:/Users/Joe/repos/Gotta-Go1/Gotta-Go/lib/supabase";
+import { supabase } from "../../lib/supabase";
 
 export default function Account({ session }) {
   const [loading, setLoading] = useState(false);

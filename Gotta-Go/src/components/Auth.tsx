@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Alert, StyleSheet, View } from "react-native";
-import { supabase } from "C:/Users/Joe/repos/Gotta-Go1/Gotta-Go/lib/supabase";
+import { supabase } from "../../lib/supabase";
 import { Button, Input } from "@rneui/themed";
+import AuthRN from '../utilities/Auth.native';
 
 export default function Auth() {
   const [email, setEmail] = useState("");
@@ -43,34 +44,36 @@ export default function Auth() {
           leftIcon={{ type: "font-awesome", name: "envelope" }}
           onChangeText={(text) => setEmail(text)}
           value={email}
-          placeholder="email@address.com"
           autoCapitalize={"none"}
+          keyboardType={"email-address"}
         />
       </View>
-      <View style={styles.verticallySpaced}>
+      <View style={[styles.verticallySpaced, styles.mt20]}>
         <Input
           label="Password"
           leftIcon={{ type: "font-awesome", name: "lock" }}
           onChangeText={(text) => setPassword(text)}
           value={password}
           secureTextEntry={true}
-          placeholder="Password"
           autoCapitalize={"none"}
         />
       </View>
       <View style={[styles.verticallySpaced, styles.mt20]}>
         <Button
-          title="Sign in"
+          title="Sign In"
           disabled={loading}
           onPress={() => signInWithEmail()}
         />
       </View>
-      <View style={styles.verticallySpaced}>
+      <View style={[styles.verticallySpaced, styles.mt20]}>
         <Button
-          title="Sign up"
+          title="Sign Up"
           disabled={loading}
           onPress={() => signUpWithEmail()}
         />
+      </View>
+      <View style={[styles.verticallySpaced, styles.mt20]}>
+        <AuthRN />
       </View>
     </View>
   );
@@ -78,13 +81,12 @@ export default function Auth() {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 40,
-    padding: 12,
+    flex: 1,
+    justifyContent: "center",
+    padding: 20,
   },
   verticallySpaced: {
-    paddingTop: 4,
-    paddingBottom: 4,
-    alignSelf: "stretch",
+    marginVertical: 10,
   },
   mt20: {
     marginTop: 20,

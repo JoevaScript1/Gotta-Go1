@@ -15,8 +15,8 @@ import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 import fetchRestrooms from "./src/utilities/restrooms";
 import FirstRoute from "./src/routes/FirstRoute";
 import SecondRoute from "./src/routes/SecondRoute";
-import Auth from "./src/componenets/Auth"; // Your Auth component to handle user authentication
-import Account from "./src/componenets/Account"; // Your Account component to display user info
+import Auth from "./src/components/Auth"; // Your Auth component to handle user authentication
+import Account from "./src/components/Account"; // Your Account component to display user info
 
 export default function App() {
   const layout = useWindowDimensions();
